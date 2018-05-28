@@ -19,12 +19,12 @@ class Package
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Vendor;
+    private $vendor;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=25)
@@ -34,22 +34,25 @@ class Package
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $Description;
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Repository;
+    private $repository;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $CreatedAt;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $UpdatedAt;
+    private $updatedAt;
+
+
+
 
     public function getId()
     {
@@ -58,26 +61,31 @@ class Package
 
     public function getVendor(): ?string
     {
-        return $this->Vendor;
+        return $this->vendor;
     }
 
-    public function setVendor(string $Vendor): self
+    public function setVendor(string $vendor): self
     {
-        $this->Vendor = $Vendor;
+        $this->vendor = $vendor;
 
         return $this;
     }
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->Vendor.'/'.$this->Name;
     }
 
     public function getVersion(): ?string
@@ -94,48 +102,48 @@ class Package
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(?string $Description): self
+    public function setDescription(?string $description): self
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
 
     public function getRepository(): ?string
     {
-        return $this->Repository;
+        return $this->repository;
     }
 
-    public function setRepository(?string $Repository): self
+    public function setRepository(?string $repository): self
     {
-        $this->Repository = $Repository;
+        $this->repository = $repository;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->CreatedAt;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->CreatedAt = $CreatedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->UpdatedAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $UpdatedAt): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->UpdatedAt = $UpdatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
