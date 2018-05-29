@@ -41,6 +41,8 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('notice', sprintf('User "%s" is registred.', $user->getUsername()));
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -68,10 +70,16 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            // Encode the password
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+
+            if (strlen($user->getPlainPassword()) > 0) {
+                // Encode the password
+                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($password);
+            }
+
             $em->flush();
+
+            $this->addFlash('notice', sprintf('User "%s" is updated.', $user->getUsername()));
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
@@ -91,6 +99,8 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush();
+
+            $this->addFlash('notice', sprintf('User "%s" is deleted.', $user->getUsername()));
         }
 
         return $this->redirectToRoute('user_index');

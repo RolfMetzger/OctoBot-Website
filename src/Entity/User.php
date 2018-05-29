@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -105,14 +106,24 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->roles = array('ROLE_USER');
         $this->isActive = true;
     }
 
     /**
-    * @Assert\NotBlank()
-    * @Assert\Length(max=4096)
+    * @var string
+    *
+    * This field will not be persisted
+    * It is used to store the password in the form
+     * @Assert\NotBlank(message="Password cannot be empty", groups={"Update"})
+     * @Assert\Regex(
+     *      pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/",
+     *      message="Password Error: Use 1 upper case letter, 1 lower case letter, and 1 number",
+     *      groups={"Update"}
+     * )
+     * @Assert\Length(max=4096)
     */
     private $plainPassword;
 
@@ -121,15 +132,24 @@ class User implements UserInterface, \Serializable
         return $this->plainPassword;
     }
 
-    public function setPlainPassword($password)
+    public function setPlainPassword($password): self
     {
         $this->plainPassword = $password;
+
+        return $this;
     }
 
     public function getSalt()
     {
         // we don't need a salt because bcrypt do this internally (algorithm: bcrypt in security.yaml).
         return null;
+    }
+
+    public function setRoles($roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getRoles()

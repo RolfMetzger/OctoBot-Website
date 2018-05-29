@@ -17,7 +17,7 @@
         {% for package_category in package_categories %}
             <tr>
                 <td>{{ package_category.id }}</td>
-                <td>{{ package_category.name }}</td>
+                <td>{{ package_category.shortname }}</td>
                 <td>
                     <a href="{{ path('package_category_show', {'id': package_category.id}) }}">show</a>
                     <a href="{{ path('package_category_edit', {'id': package_category.id}) }}">edit</a>

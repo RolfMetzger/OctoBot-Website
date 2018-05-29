@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PackageTypeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PackageCategoryRepository")
  */
 class PackageCategory
 {
@@ -46,11 +46,7 @@ class PackageCategory
 
     public function getLongname(): ?string
     {
-        if (!is_null($this->longname)) {
-            return $this->longname;
-        }
-
-        return $this->shortname;
+        return $this->longname;
     }
 
     public function setLongname(?string $longname): self

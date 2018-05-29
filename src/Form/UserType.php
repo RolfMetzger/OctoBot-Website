@@ -10,30 +10,38 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        dump($options['data']->getId());
         $builder
             ->add('username', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('email', EmailType::class);
+
+
+        if (is_null($options['data']->getId()))
+        {
+            $builder->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-                )
-            )
-            ->add('roles', ChoiceType::class, [
-                'multiple' => true,
-                'expanded' => true, // render check-boxes
-                'choices' => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'Super admin' => 'ROLE_SUPER_ADMIN',
-                ],
-            ])
-        ;
+                'second_options' => array('label' => 'Repeat Password')
+                ]
+            );
+        }
+
+        $builder->add('roles', ChoiceType::class, [
+            'multiple' => true,
+            'expanded' => true, // render check-boxes
+            'choices' => [
+                'Admin' => 'ROLE_ADMIN',
+                'Super admin' => 'ROLE_SUPER_ADMIN',
+            ],
+        ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

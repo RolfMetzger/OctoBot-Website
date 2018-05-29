@@ -37,6 +37,8 @@ class PackageCategoryController extends Controller
             $em->persist($packageCategory);
             $em->flush();
 
+            $this->addFlash('notice', sprintf('Package\'s category "%s" is registred.', $user->getName()));
+
             return $this->redirectToRoute('package_category_index');
         }
 
@@ -65,6 +67,8 @@ class PackageCategoryController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('notice', sprintf('Package\'s category "%s" is updated.', $user->getName()));
+
             return $this->redirectToRoute('package_category_edit', ['id' => $packageCategory->getId()]);
         }
 
@@ -83,6 +87,8 @@ class PackageCategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($packageCategory);
             $em->flush();
+
+            $this->addFlash('notice', sprintf('Package\'s category "%s" is deleted.', $user->getName()));
         }
 
         return $this->redirectToRoute('package_category_index');

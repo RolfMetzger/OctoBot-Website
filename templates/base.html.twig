@@ -3,24 +3,43 @@
     <head>
 
         <meta charset="UTF-8">
-        <title>{% block title %}'OctoBot'{% endblock %}</title>
+        <title>
+            {% block title %}'OctoBot'{% endblock %}
+        </title>
         {% block stylesheets %}{% endblock %}
 
     </head>
     <body>
 
+        {# ...or you can read and display every flash message available #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         <ul>
             {% if is_granted('ROLE_USER') %}
-                <li><a href="{{ path('package_index') }}">Packages</a></li>
+                <li>
+                    <a href="{{ path('package_index') }}">Packages</a>
+                </li>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{ path('package_category_index') }}">Package categories</a></li>
+                <li>
+                    <a href="{{ path('package_category_index') }}">Package categories</a>
+                </li>
             {% endif %}
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <li><a href="{{ path('user_index') }}">Users</a></li>
+                <li>
+                    <a href="{{ path('user_index') }}">Users</a>
+                </li>
             {% endif %}
             {% if is_granted('ROLE_USER') %}
-                <li><a href="{{ path('logout') }}">Logout</a></li>
+                <li>
+                    <a href="{{ path('logout') }}">Logout</a>
+                </li>
             {% endif %}
         </ul>
 
