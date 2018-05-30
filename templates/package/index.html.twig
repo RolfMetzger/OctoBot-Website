@@ -13,6 +13,7 @@
                 <th>Name</th>
                 <th>Version</th>
                 <th>Description</th>
+                <th>Website</th>
                 <th>Repository</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
@@ -25,8 +26,9 @@
                 <td>{{ package.id }}</td>
                 <td>{{ package.vendor }}</td>
                 <td>{{ package.name }}</td>
-                <td>{{ package.Version }}</td>
+                <td>{{ package.version }}</td>
                 <td>{{ package.description }}</td>
+                <td>{{ package.website }}</td>
                 <td>{{ package.repository }}</td>
                 <td>{{ package.createdAt ? package.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ package.updatedAt ? package.updatedAt|date('Y-m-d H:i:s') : '' }}</td>

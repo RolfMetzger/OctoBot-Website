@@ -29,7 +29,7 @@ class Package
     /**
      * @ORM\Column(type="string", length=25)
      */
-    private $Version;
+    private $version;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -40,6 +40,11 @@ class Package
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $repository;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $website;
 
     /**
      * @ORM\Column(type="datetime")
@@ -90,12 +95,12 @@ class Package
 
     public function getVersion(): ?string
     {
-        return $this->Version;
+        return $this->version;
     }
 
-    public function setVersion(string $Version): self
+    public function setVersion(string $version): self
     {
-        $this->Version = $Version;
+        $this->version = $version;
 
         return $this;
     }
@@ -124,6 +129,18 @@ class Package
         return $this;
     }
 
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -147,4 +164,5 @@ class Package
 
         return $this;
     }
+
 }

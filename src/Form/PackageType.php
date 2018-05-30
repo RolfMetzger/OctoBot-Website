@@ -14,8 +14,9 @@ class PackageType extends AbstractType
         $builder
             ->add('vendor')
             ->add('name')
-            ->add('Version')
+            ->add('version')
             ->add('description')
+            ->add('website')
             ->add('repository')
             // ->add('createdAt')
             // ->add('updatedAt')

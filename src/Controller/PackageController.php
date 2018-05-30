@@ -37,7 +37,7 @@ class PackageController extends Controller
             $em->persist($package);
             $em->flush();
 
-            $this->addFlash('notice', sprintf('Package "%s" is registred.', $user->getName()));
+            $this->addFlash('notice', sprintf('Package "%s" is registred.', $package->getName()));
 
             return $this->redirectToRoute('package_index');
         }
@@ -67,7 +67,7 @@ class PackageController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('notice', sprintf('Package "%s" is updated.', $user->getName()));
+            $this->addFlash('notice', sprintf('Package "%s" is updated.', $package->getName()));
 
             return $this->redirectToRoute('package_edit', ['id' => $package->getId()]);
         }
@@ -88,7 +88,7 @@ class PackageController extends Controller
             $em->remove($package);
             $em->flush();
 
-            $this->addFlash('notice', sprintf('Package "%s" is deleted.', $user->getName()));
+            $this->addFlash('notice', sprintf('Package "%s" is deleted.', $package->getName()));
         }
 
         return $this->redirectToRoute('package_index');
