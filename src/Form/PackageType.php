@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Package;
+use App\Entity\PackageCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class PackageType extends AbstractType
 {
@@ -15,6 +18,7 @@ class PackageType extends AbstractType
             ->add('vendor')
             ->add('name')
             ->add('version')
+            ->add('category', null, array('label' => 'Type'))
             ->add('description')
             ->add('website')
             ->add('repository')

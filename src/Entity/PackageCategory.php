@@ -26,6 +26,10 @@ class PackageCategory
      */
     private $longname;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Package", mappedBy="category", cascade={"persist", "remove"})
+     */
+    private $packages;
 
     public function getId()
     {
@@ -54,6 +58,28 @@ class PackageCategory
         $this->longname = $longname;
 
         return $this;
+    }
+
+    public function getPackages(): ?Package
+    {
+        return $this->packages;
+    }
+
+    public function setPackage(Package $package): self
+    {
+        $this->packages = $package;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $package->getCategory()) {
+            $package->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getShortname();
     }
 
 }

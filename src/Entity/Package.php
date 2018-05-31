@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\PackageCategory;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
@@ -30,6 +31,12 @@ class Package
      * @ORM\Column(type="string", length=25)
      */
     private $version;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PackageCategory")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -164,5 +171,19 @@ class Package
 
         return $this;
     }
+
+    public function getCategory(): ?PackageCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(PackageCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+
 
 }
