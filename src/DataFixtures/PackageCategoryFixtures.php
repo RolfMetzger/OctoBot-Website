@@ -24,7 +24,6 @@ class PackageCategoryFixtures extends Fixture
 
         $packageCategory = new PackageCategory();
         $packageCategory->setShortname('Social');
-        $packageCategory->setLongname('Social Reference');
         $manager->persist($packageCategory);
         $this->addReference(self::SOCIAL_REFERENCE, $packageCategory);
 
@@ -41,7 +40,7 @@ class PackageCategoryFixtures extends Fixture
 
         $packageCategory = new PackageCategory();
         $packageCategory->setShortname('Util');
-        $packageCategory->setLongname('Utility');                
+        $packageCategory->setLongname('Utility');
         $manager->persist($packageCategory);
         $this->addReference(self::UTIL_REFERENCE, $packageCategory);
 

@@ -42,7 +42,7 @@ class PackageFixtures extends Fixture
         $package
             ->setVendor('tentacle')
             ->setName('forum_evaluator')
-            ->setDescription('A  public "Social Reference" tentacles (packages) for the OctoBot project evaluator.')
+            ->setDescription('A  public "Social" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
             ->setCategory($this->getReference(PackageCategoryFixtures::SOCIAL_REFERENCE))
             ->setVersion('1.0.0')
@@ -53,7 +53,7 @@ class PackageFixtures extends Fixture
         $package
             ->setVendor('tentacle')
             ->setName('news_evaluator')
-            ->setDescription('A  public "Social Reference" tentacles (packages) for the OctoBot project evaluator.')
+            ->setDescription('A  public "Social" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
             ->setCategory($this->getReference(PackageCategoryFixtures::SOCIAL_REFERENCE))
             ->setVersion('1.0.0')
@@ -64,7 +64,7 @@ class PackageFixtures extends Fixture
         $package
             ->setVendor('tentacle')
             ->setName('stats_evaluator')
-            ->setDescription('A  public "Social Reference" tentacles (packages) for the OctoBot project evaluator.')
+            ->setDescription('A  public "Social" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
             ->setCategory($this->getReference(PackageCategoryFixtures::SOCIAL_REFERENCE))
             ->setVersion('1.0.0')
