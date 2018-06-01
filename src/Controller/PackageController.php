@@ -65,6 +65,9 @@ class PackageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $package->setUpdatedAt(new \DateTime());
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('notice', sprintf('Package "%s" is updated.', $package->getName()));

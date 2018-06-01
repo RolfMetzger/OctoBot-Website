@@ -64,6 +64,11 @@ class Package
     private $updatedAt;
 
 
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
 
 
     public function getId()
@@ -153,7 +158,7 @@ class Package
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    private function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -183,7 +188,4 @@ class Package
 
         return $this;
     }
-
-
-
 }
