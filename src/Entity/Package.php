@@ -33,7 +33,7 @@ class Package
     private $version;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PackageCategory")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -44,7 +44,7 @@ class Package
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $repository;
 

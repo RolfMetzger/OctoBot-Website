@@ -14,7 +14,7 @@ class PackageCategoryFixtures extends Fixture
     public const STRATEGY_REFERENCE = 'strategy';
     public const TA_REFERENCE = 'ta';
     public const UTIL_REFERENCE = 'util';
-    
+
     public function load(ObjectManager $manager)
     {
         $packageCategory = new PackageCategory();
@@ -24,6 +24,7 @@ class PackageCategoryFixtures extends Fixture
 
         $packageCategory = new PackageCategory();
         $packageCategory->setShortname('Social');
+        $packageCategory->setLongname('Social Reference');
         $manager->persist($packageCategory);
         $this->addReference(self::SOCIAL_REFERENCE, $packageCategory);
 
@@ -40,6 +41,7 @@ class PackageCategoryFixtures extends Fixture
 
         $packageCategory = new PackageCategory();
         $packageCategory->setShortname('Util');
+        $packageCategory->setLongname('Utility');                
         $manager->persist($packageCategory);
         $this->addReference(self::UTIL_REFERENCE, $packageCategory);
 
