@@ -12,12 +12,20 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserType extends AbstractType
 {
+
+    private $checker;
+
+    public function __construct(AuthorizationCheckerInterface $checker)
+    {
+        $this->checker = $checker;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        dump($options['data']->getId());
         $builder
             ->add('username', TextType::class)
             ->add('email', EmailType::class);
@@ -33,21 +41,24 @@ class UserType extends AbstractType
             );
         }
 
-        $builder->add('roles', ChoiceType::class, [
-            'multiple' => true,
-            'expanded' => true, // render check-boxes
-            'choices' => [
-                'Admin' => 'ROLE_ADMIN',
-                'Super admin' => 'ROLE_SUPER_ADMIN',
-            ],
-        ]);
+        if ($this->checker->isGranted('ROLE_SUPER_ADMIN')) {
+            $builder->add('roles', ChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true, // render check-boxes
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'Super admin' => 'ROLE_SUPER_ADMIN',
+                ],
+            ]);
+        }
+
 
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
-    }
+    // public function configureOptions(OptionsResolver $resolver)
+    // {
+    //     $resolver->setDefaults([
+    //         'data_class' => User::class,
+    //     ]);
+    // }
 }

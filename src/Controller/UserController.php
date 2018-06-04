@@ -21,7 +21,43 @@ class UserController extends Controller
      */
     public function index(UserRepository $userRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
+
         return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/register", name="user_register")
+     */
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        // 1) build the form
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render(
+            'user/register.html.twig',
+            array('form' => $form->createView())
+        );
     }
 
     /**
@@ -29,6 +65,8 @@ class UserController extends Controller
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -57,6 +95,8 @@ class UserController extends Controller
      */
     public function show(User $user): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
+
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
 
@@ -65,6 +105,8 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -95,6 +137,8 @@ class UserController extends Controller
      */
     public function delete(Request $request, User $user): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
+
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
