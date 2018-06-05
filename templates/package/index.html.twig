@@ -13,11 +13,11 @@
                 <th>Name</th>
                 <th>Version</th>
                 <th>Type</th>
-                <th>Description</th>
-                <th>Website</th>
-                <th>Repository</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
+                <!-- <th>Description</th> -->
+                <!-- <th>Website</th> -->
+                <!-- <th>Repository</th> -->
+                <!-- <th>CreatedAt</th> -->
+                <!-- <th>UpdatedAt</th> -->
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,14 +29,14 @@
                 <td>{{ package.name }}</td>
                 <td>{{ package.version }}</td>
                 <td>{{ package.category }}</td>
-                <td>{{ package.description }}</td>
-                <td>{{ package.website }}</td>
-                <td>{{ package.repository }}</td>
-                <td>{{ package.createdAt ? package.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ package.updatedAt ? package.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <!-- <td>{{ package.description }}</td> -->
+                <!-- <td>{{ package.website }}</td> -->
+                <!-- <td>{{ package.repository }}</td> -->
+                <!-- <td>{{ package.createdAt ? package.createdAt|date('Y-m-d H:i:s') : '' }}</td> -->
+                <!-- <td>{{ package.updatedAt ? package.updatedAt|date('Y-m-d H:i:s') : '' }}</td> -->
                 <td>
-                    <a href="{{ path('package_show', {'id': package.id}) }}">show</a>
-                    <a href="{{ path('package_edit', {'id': package.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('package_show', {'id': package.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('package_edit', {'id': package.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +47,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('package_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('package_new') }}">Create new</a>
 {% endblock %}

@@ -19,8 +19,8 @@
                 <td>{{ package_category.id }}</td>
                 <td>{{ package_category.shortname }}</td>
                 <td>
-                    <a href="{{ path('package_category_show', {'id': package_category.id}) }}">show</a>
-                    <a href="{{ path('package_category_edit', {'id': package_category.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('package_category_show', {'id': package_category.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('package_category_edit', {'id': package_category.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('package_category_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('package_category_new') }}">Create new</a>
 {% endblock %}
