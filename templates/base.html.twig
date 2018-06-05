@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <base href="http://localhost:8000/">
+        <!-- <base href="http://localhost:8000/"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -17,7 +17,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 
         <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
     </head>
 
     <body>
@@ -67,7 +70,6 @@
         </nav>
 
         <main role="main" class="container">
-
             <div class="starter-template">
 
                 <div class="col-md-12 col-lg-12 col-xl-12">
@@ -81,7 +83,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="col-sm-12 blog-main">
+                <div class="col-sm-12">
                     {% block body %}{% endblock %}
                 </div>
 

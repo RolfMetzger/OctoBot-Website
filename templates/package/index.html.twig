@@ -35,8 +35,8 @@
                 <!-- <td>{{ package.createdAt ? package.createdAt|date('Y-m-d H:i:s') : '' }}</td> -->
                 <!-- <td>{{ package.updatedAt ? package.updatedAt|date('Y-m-d H:i:s') : '' }}</td> -->
                 <td>
-                    <a class="btn btn-primary" href="{{ path('package_show', {'id': package.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('package_edit', {'id': package.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('package_show', {'id': package.id}) }}"><i class="fas fa-file-alt"></i> Show</a>
+                    <a class="btn btn-primary" href="{{ path('package_edit', {'id': package.id}) }}"><i class="fas fa-pencil-alt"></i> Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +47,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="{{ path('package_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('package_new') }}"><i class="fas fa-plus"></i> Create new</a>
 {% endblock %}

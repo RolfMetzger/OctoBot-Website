@@ -8,24 +8,23 @@
 
     <h1>Sign in</h1>
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    {{ form_start(form) }}
+        
+        {{ form_row(form.username, {'id': 'username', 'full_name': '_username'}) }}
+        {{ form_row(form.plainPassword, {'id': 'password', 'full_name': '_password'}) }}
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 
         {#
             If you want to control the URL the user
             is redirected to on success (more details below)
             <input type="hidden" name="_target_path" value="/account" />
         #}
+        
+        <button class="btn btn-primary" type="submit"><i class="fas fa-check"></i> Login</button>
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
-
-        <button class="btn btn-primary" type="submit">login</button>
-    </form>
+    {{ form_end(form) }}
     
+    
+
 {% endblock %}

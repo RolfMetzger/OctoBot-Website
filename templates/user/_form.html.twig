@@ -4,5 +4,5 @@
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
     {{ form_row(form.roles) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary"><i class="fas fa-check"></i> {{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

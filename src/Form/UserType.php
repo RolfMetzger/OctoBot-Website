@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserType extends AbstractType
 {
-
     private $checker;
 
     public function __construct(AuthorizationCheckerInterface $checker)
@@ -26,39 +25,52 @@ class UserType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('username', TextType::class)
-            ->add('email', EmailType::class);
+        dump($builder);
+        $builder->add('username', TextType::class);
 
+        switch ($options['form_type']) {
+            case 'register':
+                $builder->add('email', EmailType::class);
+                // if (is_null($options['data']->getId())) {
+                $builder->add(
+                    'plainPassword',
+                    RepeatedType::class,
+                    [
+                    'type' => PasswordType::class,
+                    'first_options'  => array('label' => 'Password'),
+                    'second_options' => array('label' => 'Repeat Password')
+                    ]
+                );
+                // }
+                break;
 
-        if (is_null($options['data']->getId()))
-        {
-            $builder->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password')
-                ]
-            );
+            case 'login':
+                $builder->add('plainPassword', PasswordType::class);
+                break;
+
+            case 'update':
+                $builder->add('email', EmailType::class);
+                if ($this->checker->isGranted('ROLE_SUPER_ADMIN')) {
+                    $builder->add('roles', ChoiceType::class, [
+                        'multiple' => true,
+                        'expanded' => true, // render check-boxes
+                        'choices' => [
+                            'Admin' => 'ROLE_ADMIN',
+                            'Super admin' => 'ROLE_SUPER_ADMIN',
+                        ],
+                    ]);
+                }
+                break;
         }
 
-        if ($this->checker->isGranted('ROLE_SUPER_ADMIN')) {
-            $builder->add('roles', ChoiceType::class, [
-                'multiple' => true,
-                'expanded' => true, // render check-boxes
-                'choices' => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'Super admin' => 'ROLE_SUPER_ADMIN',
-                ],
-            ]);
-        }
 
 
     }
 
-    // public function configureOptions(OptionsResolver $resolver)
-    // {
-    //     $resolver->setDefaults([
-    //         'data_class' => User::class,
-    //     ]);
-    // }
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'form_type' => 'register',
+        ]);
+    }
 }
