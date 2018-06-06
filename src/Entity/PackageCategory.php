@@ -27,7 +27,7 @@ class PackageCategory
     private $longname;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Package", mappedBy="category", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Package", mappedBy="category", cascade={"persist", "remove"})
      */
     private $packages;
 

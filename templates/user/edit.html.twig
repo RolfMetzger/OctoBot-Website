@@ -9,10 +9,11 @@
         {{ form_row(form.username) }}
         {{ form_row(form.email) }}
         {{ form_row(form.roles) }}
+
+        <a class="btn btn-secondary" href="{{ path('user_index') }}"><i class="fas fa-angle-left"></i> Back to list</a>
         <button class="btn btn-primary" type="submit"><i class="fas fa-check"></i> Update</button>
+        {{ include('user/_delete_form.html.twig') }}
+
     {{ form_end(form) }}
 
-    <a class="btn btn-primary" href="{{ path('user_index') }}"><i class="fas fa-angle-left"></i> Back to list</a>
-
-    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

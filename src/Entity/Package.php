@@ -33,7 +33,7 @@ class Package
     private $version;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

@@ -7,14 +7,4 @@
 
     {{ include('package_category/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <div class="row">
-
-        <a class="btn btn-primary" href="{{ path('package_category_index') }}">
-            <i class="fas fa-angle-left"></i>
-            Back to list</a>
-
-        {{ include('package_category/_delete_form.html.twig') }}
-
-    </div>
-
 {% endblock %}

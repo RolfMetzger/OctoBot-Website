@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         // 1) build the form
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, array('form_type'=>'register'));
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
@@ -68,7 +68,7 @@ class UserController extends Controller
         $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
 
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, array('form_type'=>'new'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -107,7 +107,7 @@ class UserController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN', null, 'Access not allowed');
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, array('form_type'=>'update'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
