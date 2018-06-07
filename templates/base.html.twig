@@ -35,17 +35,17 @@
                 <ul class="navbar-nav mr-auto">
                     {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a class="nav-link {% if app.request.attributes.get('_route') == 'package_index' %} active {% endif %} nav-link" href="{{ path('package_index') }}">Packages</a>
+                            <a class="nav-link {% if '/package/' in app.request.server.get('REQUEST_URI') %} active {% endif %} nav-link" href="{{ path('package_index') }}">Packages</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
                         <li>
-                            <a class="nav-link {% if app.request.attributes.get('_route') == 'package_category_index' %} active {% endif %}" href="{{ path('package_category_index') }}">Package types</a>
+                            <a class="nav-link {% if '/packagecategory/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('package_category_index') }}">Package types</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li>
-                            <a class="nav-link {% if app.request.attributes.get('_route') == 'user_index' %} active {% endif %}" href="{{ path('user_index') }}">Users</a>
+                            <a class="nav-link {% if '/user/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('user_index') }}">Users</a>
                         </li>
                     {% endif %}
                     <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -71,7 +71,6 @@
 
         <main role="main" class="container">
             <div class="starter-template">
-
                 <div class="col-md-12 col-lg-12 col-xl-12">
                     {% for label, messages in app.flashes %}
                         {% for message in messages %}
@@ -82,7 +81,6 @@
                         {% endfor %}
                     {% endfor %}
                 </div>
-
                 <div class="col-sm-12">
                     {% block body %}{% endblock %}
                 </div>

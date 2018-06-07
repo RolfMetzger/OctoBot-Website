@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\PackageCategory;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
@@ -44,11 +45,13 @@ class Package
     private $description;
 
     /**
+     * @Assert\Url()
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $repository;
 
     /**
+     * @Assert\Url()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
