@@ -45,3 +45,9 @@ php bin/console server:start
 ### 4) With your web browser, open where server is listening on
 
 For example : http://127.0.0.1:8000
+
+![Alt text](doc/octobot_website_login.png?raw=true "OctoBot website login page")
+
+Here is initial credentials of the super-admin user.
+ - Username : firstadmin
+ - Password : 123First*

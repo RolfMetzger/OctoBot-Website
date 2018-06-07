@@ -42,7 +42,7 @@ class UserType extends AbstractType
                 break;
 
             case 'login':
-                $builder->add('plainPassword', PasswordType::class);
+                $builder->add('plainPassword', PasswordType::class, array('label' => 'Password'));
                 break;
 
             // register + update
