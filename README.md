@@ -17,13 +17,13 @@ composer update
 
 ```
 sudo mysql
-CREATE USER 'octoweb'@'localhost' IDENTIFIED BY 'aSecurePassword';
+CREATE USER 'octoweb'@'localhost' IDENTIFIED BY '**aSecurePassword**';
 CREATE DATABASE octoweb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 GRANT ALL PRIVILEGES ON octoweb.* TO 'octoweb'@'localhost';
 ```
 
 Update the password in the .env file :
-DATABASE_URL=mysql://octoweb:aSecurePassword@127.0.0.1:3306/octoweb
+DATABASE_URL=mysql://octoweb:**aSecurePassword**@127.0.0.1:3306/octoweb
 
 #### Or with PostgreSQL
 
