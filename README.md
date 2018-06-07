@@ -13,6 +13,9 @@ composer update
 
 ### 2) Create database
 
+In the commands below, replace **aSecurePassword** with a secure password.
+Here are the steps to create the database, either with MySQL or with PostreSQL :
+
 #### Either with MySQL
 
 ```
@@ -22,7 +25,7 @@ CREATE DATABASE octoweb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 GRANT ALL PRIVILEGES ON octoweb.* TO 'octoweb'@'localhost';
 ```
 
-Update the password in the .env file :
+Update the password in the **.env** file :
 DATABASE_URL=mysql://octoweb:**aSecurePassword**@127.0.0.1:3306/octoweb
 
 #### Or with PostgreSQL
