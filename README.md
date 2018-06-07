@@ -14,6 +14,7 @@ composer update
 ### 2) Create database
 
 In the commands below, replace **aSecurePassword** with a secure password.
+
 Here are the steps to create the database, either with MySQL or with PostreSQL :
 
 #### Either with MySQL
