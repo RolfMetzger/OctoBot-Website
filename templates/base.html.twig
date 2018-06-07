@@ -35,17 +35,17 @@
                 <ul class="navbar-nav mr-auto">
                     {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a class="nav-item active nav-link" href="{{ path('package_index') }}">Packages</a>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'package_index' %} active {% endif %} nav-link" href="{{ path('package_index') }}">Packages</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
                         <li>
-                            <a class="nav-link" href="{{ path('package_category_index') }}">Package types</a>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'package_category_index' %} active {% endif %}" href="{{ path('package_category_index') }}">Package types</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li>
-                            <a class="nav-link" href="{{ path('user_index') }}">Users</a>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'user_index' %} active {% endif %}" href="{{ path('user_index') }}">Users</a>
                         </li>
                     {% endif %}
                     <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> <div class="dropdown-menu" aria-labelledby="dropdown01">
