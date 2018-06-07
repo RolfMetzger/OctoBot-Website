@@ -8,7 +8,7 @@
 ```
 git clone https://github.com/Drakkar-Software/OctoBot-Website.git
 cd OctoBot-Website
-composer update
+composer install
 ```
 
 ### 2) Create database

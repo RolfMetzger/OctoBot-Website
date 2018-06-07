@@ -51,6 +51,8 @@ class UserController extends Controller
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
+            $this->addFlash('success', sprintf('User "%s" is registred.', $user->getUsername()));
+
             return $this->redirectToRoute('login');
         }
 
@@ -79,7 +81,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('notice', sprintf('User "%s" is registred.', $user->getUsername()));
+            $this->addFlash('success', sprintf('User "%s" is registred.', $user->getUsername()));
 
             return $this->redirectToRoute('user_index');
         }
@@ -121,7 +123,7 @@ class UserController extends Controller
 
             $em->flush();
 
-            $this->addFlash('notice', sprintf('User "%s" is updated.', $user->getUsername()));
+            $this->addFlash('success', sprintf('User "%s" is updated.', $user->getUsername()));
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
@@ -144,7 +146,7 @@ class UserController extends Controller
             $em->remove($user);
             $em->flush();
 
-            $this->addFlash('notice', sprintf('User "%s" is deleted.', $user->getUsername()));
+            $this->addFlash('success', sprintf('User "%s" is deleted.', $user->getUsername()));
         }
 
         return $this->redirectToRoute('user_index');

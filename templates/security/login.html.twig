@@ -9,7 +9,7 @@
     <h1>Sign in</h1>
 
     {{ form_start(form) }}
-        
+
         {{ form_row(form.username, {'id': 'username', 'full_name': '_username'}) }}
         {{ form_row(form.plainPassword, {'id': 'password', 'full_name': '_password'}) }}
 
@@ -20,11 +20,11 @@
             is redirected to on success (more details below)
             <input type="hidden" name="_target_path" value="/account" />
         #}
-        
-        <button class="btn btn-primary" type="submit"><i class="fas fa-check"></i> Login</button>
+
+        <button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
 
     {{ form_end(form) }}
-    
-    
+
+
 
 {% endblock %}

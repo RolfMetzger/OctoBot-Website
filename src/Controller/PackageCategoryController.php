@@ -37,7 +37,7 @@ class PackageCategoryController extends Controller
             $em->persist($packageCategory);
             $em->flush();
 
-            $this->addFlash('notice', sprintf('Package\'s category "%s" is registred.', $packageCategory->getShortname()));
+            $this->addFlash('success', sprintf('Package\'s category "%s" is registred.', $packageCategory->getShortname()));
 
             return $this->redirectToRoute('package_category_index');
         }
@@ -67,7 +67,7 @@ class PackageCategoryController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('notice', sprintf('Package\'s category "%s" is updated.', $packageCategory->getShortname()));
+            $this->addFlash('success', sprintf('Package\'s category "%s" is updated.', $packageCategory->getShortname()));
 
             return $this->redirectToRoute('package_category_edit', ['id' => $packageCategory->getId()]);
         }
@@ -88,7 +88,7 @@ class PackageCategoryController extends Controller
             $em->remove($packageCategory);
             $em->flush();
 
-            $this->addFlash('notice', sprintf('Package\'s category "%s" is deleted.', $packageCategory->getShortname()));
+            $this->addFlash('success', sprintf('Package\'s category "%s" is deleted.', $packageCategory->getShortname()));
         }
 
         return $this->redirectToRoute('package_category_index');
