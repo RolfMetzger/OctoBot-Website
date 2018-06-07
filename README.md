@@ -17,7 +17,7 @@ composer update
 
 ```
 sudo mysql
-CREATE USER 'octoweb'@'localhost' IDENTIFIED BY '**aSecurePassword**';
+CREATE USER 'octoweb'@'localhost' IDENTIFIED BY 'aSecurePassword';
 CREATE DATABASE octoweb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 GRANT ALL PRIVILEGES ON octoweb.* TO 'octoweb'@'localhost';
 ```
