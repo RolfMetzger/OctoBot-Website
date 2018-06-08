@@ -52,9 +52,9 @@ DATABASE_URL=mysql://octoweb:**aSecurePassword**@127.0.0.1:3306/octoweb
 Enter this commands in a terminal prompt :
 ```bash
 # cd OctoBot-Website
-php bin/console doctrine:schema:validate
+bin/console doctrine:migrations:latest
 ```
-If an error occured "could not find driver", enter this commands in a terminal prompt (and re-enter the command above) :
+If an error occured "could not find driver", enter this command in a terminal prompt (and re-enter the command above) :
 ```bash
 sudo apt install php-mysql
 ```
@@ -99,10 +99,9 @@ DATABASE_URL=pgsql://octoweb:**aSecurePassword**@127.0.0.1:5432/octoweb
 Enter this commands in a terminal prompt :
 ```bash
 # cd OctoBot-Website
-php bin/console doctrine:schema:validate
 php bin/console doctrine:database:create
 ```
-If an error occured "could not find driver", enter this commands in a terminal prompt (and re-enter the commands above) :
+If an error occured "could not find driver", enter this command in a terminal prompt (and re-enter the command above) :
 ```bash
 sudo apt install php-pgsql
 ```
