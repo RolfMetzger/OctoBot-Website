@@ -1,25 +1,29 @@
 {
-  "name": "Drakkar-Software OctoBot-Website",
-  "description": "OctoBot cryptocurrencies trading bot website",
-  "repository": "https://github.com/Drakkar-Software/OctoBot-Website",
-  "logo": "https://avatars1.githubusercontent.com/u/38042178?s=200&v=4",
-  "keywords": ["php",
-      "symfony",
-      "bitcoin",
-      "trading-bot",
-      "trading",
-      "bitcoin",
-      "telegram",
-      "social-trading",
-      "technical-analysis",
-      "cryptocurrency",
-      "cryptobot"
-  ],
-  "addons": ["heroku-postgresql:hobby-dev"],
-  "env": {
-      "APP_ENV": {
-        "description": "Set the Symfony environment (prod, dev or test)",
-        "value": "prod"
-      }
-  }
+    "name": "Drakkar-Software OctoBot-Website",
+    "description": "OctoBot cryptocurrencies trading bot website",
+    "repository": "https://github.com/Drakkar-Software/OctoBot-Website",
+    "logo": "https://avatars1.githubusercontent.com/u/38042178?s=200&v=4",
+    "keywords": ["php",
+        "symfony",
+        "bitcoin",
+        "trading-bot",
+        "trading",
+        "bitcoin",
+        "telegram",
+        "social-trading",
+        "technical-analysis",
+        "cryptocurrency",
+        "cryptobot"
+    ],
+    "addons": [
+        {
+            "plan": "heroku-postgresql:hobby-dev"
+        }
+    ],
+    "env": {
+        "APP_ENV": {
+            "description": "Set the Symfony environment (prod, dev or test)",
+            "value": "prod"
+        }
+    }
 }
