@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Table;
 use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ORM\Table(name="tbl_package")
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
  */
 class Package

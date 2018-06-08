@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Table;
 
 /**
+ * @ORM\Table(name="tbl_package_category")
  * @ORM\Entity(repositoryClass="App\Repository\PackageCategoryRepository")
  */
 class PackageCategory
