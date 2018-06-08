@@ -126,3 +126,8 @@ For example : http://127.0.0.1:8000
 Here is initial credentials of the super-admin user.
  - Username : firstadmin
  - Password : 123First*
+
+
+## Demo
+
+[http://drakkar-octobot.herokuapp.com/](http://drakkar-octobot.herokuapp.com/)
