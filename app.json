@@ -15,6 +15,7 @@
       "cryptocurrency",
       "cryptobot"
   ],
+  "addons": ["heroku-postgresql:hobby-dev", "papertrail"],
   "env": {
       "APP_ENV": {
         "description": "Set the Symfony environment (prod, dev or test)",
