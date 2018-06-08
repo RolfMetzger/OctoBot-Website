@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -81,6 +82,15 @@ class UserType extends AbstractType
                         ),
                     ));
                 }
+                // $builder->add('isActive', ChoiceType::class, array(
+                //     'choices'  => array(
+                //         'Yes' => true,
+                //         'No' => false,
+                //     ),
+                // ));
+                $builder->add('isActive', CheckboxType::class, array(
+                    'required' => false,
+                ));
                 break;
         }
     }
