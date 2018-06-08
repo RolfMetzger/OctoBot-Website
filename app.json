@@ -15,4 +15,9 @@
       "cryptocurrency",
       "cryptobot"
   ],
+  "env": {
+  "APP_ENV": {
+    "description": "Set the Symfony environment (prod, dev or test)",
+    "value": "prod"
+  },
 }
