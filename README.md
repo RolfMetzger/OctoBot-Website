@@ -49,6 +49,17 @@ Uncomment and update the password in this line of **.env** file :
 DATABASE_URL=mysql://octoweb:**aSecurePassword**@127.0.0.1:3306/octoweb
 
 
+Enter this commands in a terminal prompt :
+```bash
+# cd OctoBot-Website
+php bin/console doctrine:schema:validate
+```
+If an error occured "could not find driver", enter this commands in a terminal prompt :
+```bash
+sudo apt install php-mysql
+```
+
+
 #### Or with PostgreSQL
 
 Enter this commands in a terminal prompt :
@@ -84,11 +95,18 @@ doctrine:
 Uncomment and update the password in this line of **.env** file :
 DATABASE_URL=pgsql://octoweb:**aSecurePassword**@127.0.0.1:5432/octoweb
 
+
 Enter this commands in a terminal prompt :
 ```bash
 # cd OctoBot-Website
+php bin/console doctrine:schema:validate
 php bin/console doctrine:database:create
 ```
+If an error occured "could not find driver", enter this commands in a terminal prompt :
+```bash
+sudo apt install php-pgsql
+```
+
 
 ### 3) Fill database and start built-in server
 
