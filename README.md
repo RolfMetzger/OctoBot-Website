@@ -54,7 +54,7 @@ Enter this commands in a terminal prompt :
 # cd OctoBot-Website
 php bin/console doctrine:schema:validate
 ```
-If an error occured "could not find driver", enter this commands in a terminal prompt :
+If an error occured "could not find driver", enter this commands in a terminal prompt (and re-enter the command above) :
 ```bash
 sudo apt install php-mysql
 ```
@@ -102,7 +102,7 @@ Enter this commands in a terminal prompt :
 php bin/console doctrine:schema:validate
 php bin/console doctrine:database:create
 ```
-If an error occured "could not find driver", enter this commands in a terminal prompt :
+If an error occured "could not find driver", enter this commands in a terminal prompt (and re-enter the commands above) :
 ```bash
 sudo apt install php-pgsql
 ```
