@@ -131,3 +131,5 @@ Here is initial credentials of the super-admin user.
 ## Demo
 
 [http://drakkar-octobot.herokuapp.com/](http://drakkar-octobot.herokuapp.com/)
+
+Thanks to [Heroku](https://www.heroku.com/)
