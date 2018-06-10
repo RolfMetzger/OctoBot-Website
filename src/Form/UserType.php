@@ -74,6 +74,9 @@ class UserType extends AbstractType
                         ),
                     ));
                 }
+                $builder->add('isActive', CheckboxType::class, array(
+                    'required' => false,
+                ));
                 break;
 
             case 'update':
