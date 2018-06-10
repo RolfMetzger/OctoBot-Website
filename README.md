@@ -118,7 +118,7 @@ php bin/console doctrine:fixtures:load
 php bin/console server:start
 ```
 
-### 4) With your web browser, open where server is listening on
+### 4) With your web browser open url where server is listening on
 
 For example : http://127.0.0.1:8000
 
