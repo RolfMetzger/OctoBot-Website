@@ -1,9 +1,8 @@
-# OctoBot-Website
-
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+# OctoBot-Website
 
-## Install
+## Installation
 
 ### 1) Get all source files
 
@@ -135,3 +134,9 @@ Here is initial credentials of the super-admin user.
 [http://drakkar-octobot.herokuapp.com/](http://drakkar-octobot.herokuapp.com/)
 
 Thanks to [Heroku](https://www.heroku.com/)
+
+
+<!-- ## Contributing
+
+CryptoBot-Website is an open source project that welcomes pull requests and issues from anyone.
+Before opening pull requests, please read our short Contribution Guide. -->
