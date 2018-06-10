@@ -3,6 +3,7 @@
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
+    {{ form_row(form.isActive) }}
     {{ form_row(form.roles) }}
 
     <a class="btn btn-secondary" href="{{ path('user_index') }}"><i class="fas fa-angle-left"></i> Back to list</a>

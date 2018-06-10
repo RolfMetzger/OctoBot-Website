@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class UserType extends AbstractType
 {
@@ -39,6 +40,11 @@ class UserType extends AbstractType
                     'first_options'  => array('label' => 'Password'),
                     'second_options' => array('label' => 'Repeat Password')
                     ]
+                );
+                $builder->add('termsAccepted', CheckboxType::class, array(
+                    'mapped' => false,
+                    'constraints' => new IsTrue(),
+                  )
                 );
                 break;
 
@@ -68,6 +74,9 @@ class UserType extends AbstractType
                         ),
                     ));
                 }
+                $builder->add('isActive', CheckboxType::class, array(
+                    'required' => false,
+                ));
                 break;
 
             case 'update':

@@ -7,11 +7,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Psr\Log\LoggerInterface;
+
 use App\Entity\User;
 use App\Form\UserType;
 
 class SecurityController extends Controller
 {
+
+  private $logger;
+
+  public function __construct(LoggerInterface $logger)
+  {
+    $this->logger = $logger;
+  }
 
     /**
      * @Route("/register", name="register")
@@ -52,8 +61,12 @@ class SecurityController extends Controller
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $this->logger->info('XXX login');
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        if ($error) {
+            $this->addFlash('danger', $error->getMessageKey());
+        }
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -66,7 +79,6 @@ class SecurityController extends Controller
         return $this->render('security/login.html.twig', array(
             'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error'         => $error,
         ));
     }
 
