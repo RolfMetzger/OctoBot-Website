@@ -16,9 +16,10 @@ security:
             security: false
         main:
             # to parse all URL by the firewall
-            pattern:    ^/
+            pattern: ^/
             http_basic: ~
             provider: our_db_provider
+            user_checker: App\Security\UserChecker
 
             # home page accessible to everyone
             anonymous: true
