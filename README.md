@@ -120,7 +120,7 @@ php bin/console server:start
 
 ### 4) With your web browser open url where server is listening on
 
-For example : http://127.0.0.1:8000
+For example, with your browser open this page :  http://127.0.0.1:8000 and GO !
 
 ![Alt text](doc/octobot_website_login.png?raw=true "OctoBot website login page")
 
