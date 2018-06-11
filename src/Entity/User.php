@@ -8,45 +8,68 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Table(name="tbl_user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
+ * @ApiResource(attributes={"normalization_context"={"groups"={"get"}}})
  */
 class User implements UserInterface, \Serializable
 {
     /**
+     * @var int The id of this user
+     *
      * @ORM\Id()
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"get"})
      */
     private $id;
 
     /**
+     * @var string The username of the user
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
+     *
+     * @Groups({"get"})
      */
     private $username;
 
     /**
+     * @var string The email of the user
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
      * @Assert\Email()
+     *
+     * @Groups({"get"})
      */
     private $email;
 
     /**
-    * The length=64 works well with bcrypt algorithm.
-    * @ORM\Column(type="string", length=64)
+     * @var string The password of the user
+     *
+     * @ORM\Column(type="string", length=64)
      */
+     // The length=64 works well with bcrypt algorithm.
     private $password;
 
     /**
+     * @var string Is the user account active
+     *
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"get"})
      */
     private $isActive;
+
+
 
     public function getId()
     {

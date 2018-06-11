@@ -6,14 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Table(name="tbl_package")
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
+ * @ApiResource
  */
 class Package
 {
     /**
+     * @var int The id of this package.
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -21,49 +25,67 @@ class Package
     private $id;
 
     /**
+     * @var string The author of the package.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $vendor;
 
     /**
+     * @var string The name of the package.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @var string The version of the package.
+     *
      * @ORM\Column(type="string", length=25)
      */
     private $version;
 
     /**
+     * @var string The type of package.
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
+     * @var string The description of the package.
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
+     * @var string The repository of the package.
+     *
      * @Assert\Url()
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $repository;
 
     /**
+     * @var string The web site of the package.
+    *
      * @Assert\Url()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
 
     /**
+     * @var string The creation date of the package.
+     *
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @var string The updating date of the package.
+     *
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
@@ -107,7 +129,7 @@ class Package
 
     public function getFullName(): ?string
     {
-        return $this->Vendor.'/'.$this->Name;
+        return $this->vendor.'/'.$this->name;
     }
 
     public function getVersion(): ?string
