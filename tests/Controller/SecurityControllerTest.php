@@ -68,14 +68,19 @@ class SecurityControllerTest extends WebTestCase
         // after login -> /package : OK
         $crawler = $this->client->request('GET', '/package/');
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        //$this->assertSame('Control panel', $crawler->filter('h1')->text());
+        $this->assertSame('Package index', $crawler->filter('h1')->text());
+
+        // after login -> /packagecategory : OK
+        $crawler = $this->client->request('GET', '/packagecategory/');
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Package Types index', $crawler->filter('h1')->text());
 
         // after login -> /admin : KO
-        $this->client->request('GET', '/admin');
+        $this->client->request('GET', '/admin/');
         $this->assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
 
         // after login -> /user : KO
-        $this->client->request('GET', '/user');
+        $this->client->request('GET', '/user/');
         $this->assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
 
         $this->logout();
@@ -87,24 +92,24 @@ class SecurityControllerTest extends WebTestCase
     public function testAdminRole()
     {
         // before login -> /admin : KO
-        $this->client->request('GET', '/admin');
+        $this->client->request('GET', '/admin/');
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
 
         $this->login('ROLE_ADMIN');
 
         // after login -> /admin : OK
-        $crawler = $this->client->request('GET', '/admin');
+        $crawler = $this->client->request('GET', '/admin/');
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertSame('Control panel', $crawler->filter('h1')->text());
 
         // after login -> /user : KO
-        $this->client->request('GET', '/user');
+        $this->client->request('GET', '/user/');
         $this->assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
 
         $this->logout();
 
         // after logout -> /admin : KO
-        $this->client->request('GET', '/admin');
+        $this->client->request('GET', '/admin/');
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
@@ -116,15 +121,14 @@ class SecurityControllerTest extends WebTestCase
         $this->login('ROLE_SUPER_ADMIN');
 
         // after login -> /admin : OK
-        $crawler = $this->client->request('GET', '/admin');
+        $crawler = $this->client->request('GET', '/admin/');
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertSame('Control panel', $crawler->filter('h1')->text());
 
-/*
         // after login -> /user : OK
-        $this->client->request('GET', '/user');
+        $this->client->request('GET', '/user/');
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-*/
+
         $this->logout();
     }
 
