@@ -61,7 +61,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @var string Is the user account active
+     * @var boolean Is the user account active
      *
      * @ORM\Column(type="boolean")
      *

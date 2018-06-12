@@ -46,7 +46,7 @@ class Package
     private $version;
 
     /**
-     * @var string The type of package.
+     * @var PackageCategory The type of package.
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
