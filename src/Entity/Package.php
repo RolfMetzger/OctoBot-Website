@@ -6,12 +6,24 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Table(name="tbl_package")
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
- * @ApiResource
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post"={
+ *              "access_control"="is_granted('ROLE_USER')",
+ *              "access_control_message"="Only user can add package."
+ *          }
+ *     },
+ *     itemOperations={
+ *         "get"
+ *     }
+ * )
  */
 class Package
 {
@@ -23,6 +35,13 @@ class Package
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string The owner of the package.
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $owner;
 
     /**
      * @var string The author of the package.
@@ -91,10 +110,11 @@ class Package
     private $updatedAt;
 
 
-    public function __construct()
+    public function __construct(UserInterface $user = null)
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
+        $this->owner = $user.id;
     }
 
 

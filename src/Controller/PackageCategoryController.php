@@ -20,6 +20,8 @@ class PackageCategoryController extends Controller
      */
     public function index(PackageCategoryRepository $packageTypeRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         return $this->render('package_category/index.html.twig', ['package_categories' => $packageTypeRepository->findAll()]);
     }
 
@@ -28,6 +30,8 @@ class PackageCategoryController extends Controller
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         $packageCategory = new PackageCategory();
         $form = $this->createForm(PackageCategoryType::class, $packageCategory);
         $form->handleRequest($request);
@@ -53,6 +57,8 @@ class PackageCategoryController extends Controller
      */
     public function show(PackageCategory $packageCategory): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         return $this->render('package_category/show.html.twig', ['package_category' => $packageCategory]);
     }
 
@@ -61,6 +67,8 @@ class PackageCategoryController extends Controller
      */
     public function edit(Request $request, PackageCategory $packageCategory): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         $form = $this->createForm(PackageCategoryType::class, $packageCategory);
         $form->handleRequest($request);
 
@@ -83,6 +91,8 @@ class PackageCategoryController extends Controller
      */
     public function delete(Request $request, PackageCategory $packageCategory): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         if ($this->isCsrfTokenValid('delete'.$packageCategory->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($packageCategory);

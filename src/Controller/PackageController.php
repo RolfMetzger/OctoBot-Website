@@ -28,6 +28,8 @@ class PackageController extends Controller
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         $package = new Package();
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
@@ -61,6 +63,8 @@ class PackageController extends Controller
      */
     public function edit(Request $request, Package $package): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
 
@@ -86,6 +90,8 @@ class PackageController extends Controller
      */
     public function delete(Request $request, Package $package): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
+
         if ($this->isCsrfTokenValid('delete'.$package->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($package);

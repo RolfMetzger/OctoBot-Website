@@ -6,11 +6,30 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\PersistentCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Table(name="tbl_package_category")
  * @ORM\Entity(repositoryClass="App\Repository\PackageCategoryRepository")
- * @ApiResource
+ * @ApiResource(
+ *     attributes={
+ *         "access_control"="is_granted('ROLE_USER')",
+ *         "denormalization_context"={"groups"={"set"}}
+ *     },
+ *     collectionOperations={
+ *         "get",
+ *         "post"={
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *              "access_control_message"="Only user can add package category."
+ *          }
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_USER')",
+ *              "access_control_message"="Only user can get package category."
+ *          }
+ *     }
+ * )
  */
 class PackageCategory
 {
@@ -27,6 +46,8 @@ class PackageCategory
      * @var string The shortname of the package type
      *
      * @ORM\Column(type="string", length=15)
+     *
+     * @Groups({"set"})
      */
     private $shortname;
 
@@ -34,6 +55,8 @@ class PackageCategory
      * @var string The longname of the package type
      *
      * @ORM\Column(type="string", length=50, nullable=true)
+     *
+     * @Groups({"set"})
      */
     private $longname;
 

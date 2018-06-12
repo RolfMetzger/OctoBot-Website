@@ -24,7 +24,9 @@
 
     <form>
         <a class="btn btn-secondary" href="{{ path('package_category_index') }}"><i class="fas fa-angle-left"></i> Back to list</a>
-        <a class="btn btn-primary" href="{{ path('package_category_edit', {'id': package_category.id}) }}"><i class="fas fa-pencil-alt"></i> Edit</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-primary" href="{{ path('package_category_edit', {'id': package_category.id}) }}"><i class="fas fa-pencil-alt"></i> Edit</a>
+        {% endif %}
     </form>
 
 {% endblock %}

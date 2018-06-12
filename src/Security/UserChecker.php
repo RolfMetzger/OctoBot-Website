@@ -21,7 +21,7 @@ class UserChecker implements UserCheckerInterface
         }
 
         // user is not active, show a generic Account Not Active message.
-        if (!$user->getIsActive()) {
+        if (!$user->isActive()) {
             throw new AccountNotActiveException();
         }
 

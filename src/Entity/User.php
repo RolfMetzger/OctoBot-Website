@@ -16,7 +16,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
- * @ApiResource(attributes={"normalization_context"={"groups"={"get"}}})
+ * @ApiResource(
+ *     attributes={
+ *         "access_control"="is_granted('ROLE_USER')",
+ *         "normalization_context"={"groups"={"get"}}
+ *     },
+ *     collectionOperations={
+ *         "get",
+ *         "post"={
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *              "access_control_message"="Only admin can add user."
+ *          }
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_USER') and object.id == user.id",
+ *              "access_control_message"="Sorry, but you are not the user profile owner."
+ *          }
+ *     }
+ * )
  */
 class User implements UserInterface, \Serializable
 {
@@ -61,6 +79,21 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
+    * @var string
+    *
+    * This field will not be persisted
+    * It is used to store the password in the form
+     * @Assert\NotBlank(message="Password cannot be empty", groups={"Update"})
+     * @Assert\Regex(
+     *      pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/",
+     *      message="Password Error: Use 1 upper case letter, 1 lower case letter, and 1 number",
+     *      groups={"Update"}
+     * )
+     * @Assert\Length(max=4096)
+    */
+    private $plainPassword;
+
+    /**
      * @var boolean Is the user account active
      *
      * @ORM\Column(type="boolean")
@@ -69,7 +102,20 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @var array(Role)
+     *
+     * @ORM\Column(type="array")
+     */
+    private $roles;
 
+
+
+    public function __construct()
+    {
+        $this->roles = array('ROLE_USER');
+        $this->isActive = true;
+    }
 
     public function getId()
     {
@@ -123,34 +169,6 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
-
-
-    /* lignes ajoutées :*/
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $roles;
-
-    public function __construct()
-    {
-        $this->roles = array('ROLE_USER');
-        $this->isActive = true;
-    }
-
-    /**
-    * @var string
-    *
-    * This field will not be persisted
-    * It is used to store the password in the form
-     * @Assert\NotBlank(message="Password cannot be empty", groups={"Update"})
-     * @Assert\Regex(
-     *      pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/",
-     *      message="Password Error: Use 1 upper case letter, 1 lower case letter, and 1 number",
-     *      groups={"Update"}
-     * )
-     * @Assert\Length(max=4096)
-    */
-    private $plainPassword;
 
     public function getPlainPassword()
     {

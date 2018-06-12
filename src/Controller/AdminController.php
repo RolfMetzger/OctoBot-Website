@@ -15,6 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access not allowed');
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
         ]);

@@ -54,6 +54,12 @@
                 <ul class="navbar-nav mr-right">
                     {% if is_granted('ROLE_USER') %}
                         <li>
+                            <div class="nav-link disabled">
+                                <i class="fas fa-user"></i>
+                                <strong>{{ app.user.username }}</strong>
+                            </div>
+                        </li>
+                        <li>
                             <a class="nav-link" href="{{ path('logout') }}">Logout</a>
                         </li>
                         {% else %}

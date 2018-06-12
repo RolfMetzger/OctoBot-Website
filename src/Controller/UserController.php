@@ -10,12 +10,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
 /**
  * @Route("/user")
  */
 class UserController extends Controller
 {
+
+    private $roleHierarchy;
+
+    public function __construct(RoleHierarchyInterface $roleHierarchy)
+    {
+        $this->roleHierarchy = $roleHierarchy;
+    }
+
     /**
      * @Route("/", name="user_index", methods="GET")
      */
@@ -42,6 +51,10 @@ class UserController extends Controller
             // Encode the password
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+
+            //dump($user->getRoles());
+            //$user->setRoles(array_intersect($user->getRoles(), $this->roleHierarchy));
+
             $em->persist($user);
             $em->flush();
 
