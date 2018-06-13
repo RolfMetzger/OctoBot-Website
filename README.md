@@ -1,5 +1,7 @@
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+[![Build Status](https://travis-ci.org/Drakkar-Software/OctoBot-Website.svg?branch=master)](https://travis-ci.org/Drakkar-Software/OctoBot-Website)
+
 # OctoBot-Website
 
 ## Installation
