@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
@@ -109,11 +108,11 @@ class Package
     private $updatedAt;
 
 
-    public function __construct(UserInterface $user = null)
+    public function __construct(int $ownerUserId)
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
-        $this->owner = $user.id;
+        $this->owner = $ownerUserId;
     }
 
 

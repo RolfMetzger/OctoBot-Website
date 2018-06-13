@@ -4,17 +4,19 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Entity\Package;
+use App\DataFixtures\UserFixtures;
 use App\DataFixtures\PackageCategoryFixtures;
 
-class PackageFixtures extends Fixture
+class PackageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
 
         /////////////////////////////////////
         // RealTime
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('instant_fluctuations_evaluator')
@@ -25,7 +27,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/RealTime/instant_fluctuations_evaluator.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('orderbook_evaluator')
@@ -38,7 +40,7 @@ class PackageFixtures extends Fixture
 
         /////////////////////////////////////
         // Social
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('forum_evaluator')
@@ -49,7 +51,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/forum_evaluator.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('news_evaluator')
@@ -60,7 +62,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/news_evaluator.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('stats_evaluator')
@@ -73,7 +75,7 @@ class PackageFixtures extends Fixture
 
         /////////////////////////////////////
         // Strategies
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('mixed_strategies_evaluator')
@@ -86,7 +88,7 @@ class PackageFixtures extends Fixture
 
         /////////////////////////////////////
         // TA
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('momentum_evaluator')
@@ -97,7 +99,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/momentum_evaluator.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('trend_evaluator')
@@ -108,7 +110,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/trend_evaluator.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('volatility_evaluator')
@@ -121,7 +123,7 @@ class PackageFixtures extends Fixture
 
         /////////////////////////////////////
         // Util
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('overall_state_analysis')
@@ -132,7 +134,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/overall_state_analysis.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('pattern_analysis')
@@ -143,7 +145,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/pattern_analysis.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('statistics_analysis')
@@ -154,7 +156,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/statistics_analysis.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('text_analysis')
@@ -165,7 +167,7 @@ class PackageFixtures extends Fixture
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/TA/text_analysis.py');
         $manager->persist($package);
 
-        $package = new Package();
+        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('trend_analysis')
@@ -177,7 +179,14 @@ class PackageFixtures extends Fixture
         $manager->persist($package);
 
 
-
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return array(
+            UserFixtures::class,
+            PackageCategoryFixtures::class,
+         );
     }
 }
