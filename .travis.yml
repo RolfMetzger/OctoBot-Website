@@ -8,4 +8,4 @@ before_script:
 
 script:
    - composer install
-   - vendor/bin/phpunit
+   - bin/phpunit
