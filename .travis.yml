@@ -8,4 +8,6 @@ before_script:
 
 script:
    - composer install
+   - bin/console doctrine:migrations:migrate
+   - bin/console doctrine:fixtures:load
    - bin/phpunit
