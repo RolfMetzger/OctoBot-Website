@@ -27,7 +27,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
             ->setRepository('https://github.com/Drakkar-Software/OctoBot-Tentacles/blob/master/RealTime/instant_fluctuations_evaluator.py');
         $manager->persist($package);
 
-        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
+        $package = new Package($this->getReference(UserFixtures::ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('orderbook_evaluator')
@@ -40,7 +40,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
 
         /////////////////////////////////////
         // Social
-        $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
+        $package = new Package($this->getReference(UserFixtures::BASIC_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
             ->setName('forum_evaluator')

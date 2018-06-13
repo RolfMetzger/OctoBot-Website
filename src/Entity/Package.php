@@ -233,4 +233,16 @@ class Package
 
         return $this;
     }
+
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(int $owner): self
+    {
+        $this->owner = $owner;
+        return $this;
+    }
+
 }

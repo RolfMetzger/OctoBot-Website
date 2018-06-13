@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
 * @Route("/package")
@@ -26,11 +27,10 @@ class PackageController extends Controller
     /**
      * @Route("/new", name="package_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, TokenStorageInterface $tokenStorage): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
-
-        $package = new Package();
+        $package = new Package($tokenStorage->getToken()->getUser()->getId());
         $form = $this->createForm(PackageType::class, $package);
         $form->handleRequest($request);
 
