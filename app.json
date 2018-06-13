@@ -27,6 +27,10 @@
         "APP_ENV": {
             "description": "Set the Symfony environment (prod, dev or test)",
             "value": "prod"
-        }
+        },
+        "CORS_ALLOW_ORIGIN": {
+            "description": "nelmio/cors-bundle",
+            "value": "^https?://localhost:?[0-9]*$"
+        },
     }
 }
