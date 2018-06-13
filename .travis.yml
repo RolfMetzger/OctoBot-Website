@@ -3,6 +3,9 @@ language: php
 php:
   - '7.2'
 
+before_script:
+  - psql -c "CREATE USER octoweb WITH PASSWORD 'db_password';" -U postgres
+
 script:
    - composer install
    - vendor/bin/phpunit
