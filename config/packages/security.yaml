@@ -31,6 +31,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 # defaut page after success login
                 default_target_path: /package
+
             logout:
                 path:  /logout
                 target: /

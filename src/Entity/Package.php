@@ -8,17 +8,14 @@ use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ORM\Table(name="tbl_package")
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
  * @ApiResource(
  *     collectionOperations={
- *         "get",
- *         "post"={
- *              "access_control"="is_granted('ROLE_USER')",
- *              "access_control_message"="Only user can add package."
- *          }
+ *         "get"
  *     },
  *     itemOperations={
  *         "get"
@@ -69,6 +66,8 @@ class Package
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @ApiSubresource
      */
     private $category;
 

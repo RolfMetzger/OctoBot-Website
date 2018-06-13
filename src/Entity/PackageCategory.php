@@ -12,22 +12,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="tbl_package_category")
  * @ORM\Entity(repositoryClass="App\Repository\PackageCategoryRepository")
  * @ApiResource(
- *     attributes={
- *         "access_control"="is_granted('ROLE_USER')",
- *         "denormalization_context"={"groups"={"set"}}
- *     },
  *     collectionOperations={
- *         "get",
- *         "post"={
- *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
- *              "access_control_message"="Only user can add package category."
- *          }
+ *         "get"
  *     },
  *     itemOperations={
- *         "get"={
- *              "access_control"="is_granted('ROLE_USER')",
- *              "access_control_message"="Only user can get package category."
- *          }
+ *         "get"
  *     }
  * )
  */

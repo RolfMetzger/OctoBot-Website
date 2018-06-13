@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Psr\Log\LoggerInterface;
@@ -14,13 +15,12 @@ use App\Form\UserType;
 
 class SecurityController extends Controller
 {
+    private $logger;
 
-  private $logger;
-
-  public function __construct(LoggerInterface $logger)
-  {
-    $this->logger = $logger;
-  }
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @Route("/register", name="register")
@@ -82,13 +82,12 @@ class SecurityController extends Controller
     }
 
     /**
-     * La route pour se deconnecter.
-     * Mais celle ci ne doit jamais être executé car symfony l'interceptera avant.
+     * The road to disconnect.
+     * But this one should never be executed because symfony will intercept it before.
      * @Route("/logout", name="logout")
      */
     public function logout(): void
     {
         throw new \Exception('This should never be reached!');
     }
-
 }
