@@ -5,11 +5,11 @@ php:
 
 before_script:
   - psql -c "CREATE USER octoweb WITH PASSWORD 'db_password';" -U postgres
-  - psql -c "CREATE DATABASE octoweb;" -U postgres 
+  - psql -c "CREATE DATABASE octoweb;" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE octoweb TO octoweb;" -U postgres
 
 script:
    - composer install
-   - bin/console doctrine:migrations:migrate
+   - bin/console doctrine:migrations:migrate --no-interaction
    - bin/console doctrine:fixtures:load
    - bin/phpunit
