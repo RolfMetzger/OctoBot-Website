@@ -18,11 +18,11 @@ class PackageCategoryController extends Controller
     /**
      * @Route("/", name="package_category_index", methods="GET")
      */
-    public function index(PackageCategoryRepository $packageTypeRepository): Response
+    public function index(PackageCategoryRepository $pcRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access not allowed');
 
-        return $this->render('package_category/index.html.twig', ['package_categories' => $packageTypeRepository->findAll()]);
+        return $this->render('package_category/index.html.twig', ['package_categories' => $pcRepository->findAll()]);
     }
 
     /**
