@@ -31,6 +31,6 @@
         "CORS_ALLOW_ORIGIN": {
             "description": "nelmio/cors-bundle",
             "value": "http://drakkar-octobot.herokuapp.com/"
-        },
+        }
     }
 }
