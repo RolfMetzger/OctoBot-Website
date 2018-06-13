@@ -33,21 +33,20 @@
 
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav mr-auto">
-                    {% if is_granted('ROLE_USER') %}
-                        <li>
-                            <a class="nav-link {% if '/package/' in app.request.server.get('REQUEST_URI') %} active {% endif %} nav-link" href="{{ path('package_index') }}">Packages</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a class="nav-link {% if '/packagecategory/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('package_category_index') }}">Package types</a>
-                        </li>
-                    {% endif %}
+                    <li>
+                        <a class="nav-link {% if '/package/' in app.request.server.get('REQUEST_URI') %} active {% endif %} nav-link" href="{{ path('package_index') }}">Packages</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {% if '/packagecategory/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('package_category_index') }}">Package types</a>
+                    </li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li>
                             <a class="nav-link {% if '/user/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('user_index') }}">Users</a>
                         </li>
                     {% endif %}
+                    <li>
+                        <a class="nav-link" href="{{ path('api_entrypoint') }}">Api</a>
+                    </li>
                     <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a> </div> </li> -->
                 </ul>
@@ -56,7 +55,9 @@
                         <li>
                             <div class="nav-link disabled">
                                 <i class="fas fa-user"></i>
-                                <strong>{{ app.user.username }}</strong>
+                                {% if app.user %}
+                                    <strong>{{ app.user.username }}</strong>
+                                {% endif %}
                             </div>
                         </li>
                         <li>

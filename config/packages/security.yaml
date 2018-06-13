@@ -45,7 +45,7 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/package, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/package/category, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/package/category, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_SUPER_ADMIN }

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\BrowserKit\Cookie;
+use Psr\Log\LogLevel;
 
 class SecurityControllerTest extends WebTestCase
 {
@@ -18,12 +19,12 @@ class SecurityControllerTest extends WebTestCase
         $this->session = $this->client->getContainer()->get('session');
     }
 
-    private function login($role)
+    private function login($username = 'username', $role = 'ROLE_USER')
     {
         $firewallName = 'main';
         $firewallContext = 'main';
 
-        $token = new UsernamePasswordToken('admin', null, $firewallName, array($role));
+        $token = new UsernamePasswordToken($username, null, $firewallName, array($role));
         $this->session->set('_security_'.$firewallContext, serialize($token));
         $this->session->save();
 
@@ -63,7 +64,7 @@ class SecurityControllerTest extends WebTestCase
      */
     public function testUserRole()
     {
-        $this->login('ROLE_USER');
+        $this->login('user', 'ROLE_USER');
 
         // after login -> /package : OK
         $crawler = $this->client->request('GET', '/package/');
@@ -91,11 +92,13 @@ class SecurityControllerTest extends WebTestCase
      */
     public function testAdminRole()
     {
+        // $this->logger->debug('testAdminRole');
+
         // before login -> /admin : KO
         $this->client->request('GET', '/admin/');
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
 
-        $this->login('ROLE_ADMIN');
+        $this->login('admin', 'ROLE_ADMIN');
 
         // after login -> /admin : OK
         $crawler = $this->client->request('GET', '/admin/');
@@ -118,7 +121,9 @@ class SecurityControllerTest extends WebTestCase
      */
     public function testSuperAdminRole()
     {
-        $this->login('ROLE_SUPER_ADMIN');
+        // $this->logger->debug('testSuperAdminRole');
+
+        $this->login('super-admin', 'ROLE_SUPER_ADMIN');
 
         // after login -> /admin : OK
         $crawler = $this->client->request('GET', '/admin/');
