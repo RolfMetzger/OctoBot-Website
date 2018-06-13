@@ -44,7 +44,7 @@ class SecurityControllerTest extends WebTestCase
      */
     public function testShowlogin()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $this->client->request('GET', '/login');
 
         // asserts that login path exists and don't return an error
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
