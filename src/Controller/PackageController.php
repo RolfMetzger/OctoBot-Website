@@ -23,7 +23,7 @@ class PackageController extends Controller
     public function __construct(TokenStorageInterface $tokenStorage)
     {
         $this->user = $tokenStorage->getToken()->getUser();
-        if ($this->user == 'anon.') {
+        if ( ($this->user == 'anon.') || ($this->user == 'user') ){
             $this->userId = 0;
         }
         else {
