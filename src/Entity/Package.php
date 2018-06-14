@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
@@ -13,11 +14,23 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  * @ORM\Table(name="tbl_package")
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
  * @ApiResource(
+ *     attributes={
+ *         "order"={
+ *             "public": "ASC",
+ *             "name": "ASC"
+ *         }
+ *     },
  *     collectionOperations={
- *         "get"
+ *         "get"={
+ *              "access_control"="object.owner == user",
+ *              "access_control_message"="Sorry, but you are not the user profile owner."
+ *          }
  *     },
  *     itemOperations={
- *         "get"
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN') or object.owner == user",
+ *              "access_control_message"="Sorry, but you are not the user profile owner."
+ *          }
  *     }
  * )
  */
@@ -29,13 +42,19 @@ class Package
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"get"})
      */
     private $id;
 
     /**
-     * @var string The owner of the package.
+     * @var User The owner of the package.
      *
-     * @ORM\Column(type="integer", options={"default":1})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="packages")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Groups({"get"})
+     * @ApiSubresource
      */
     private $owner;
 
@@ -43,6 +62,8 @@ class Package
      * @var string The author of the package.
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"get"})
      */
     private $vendor;
 
@@ -51,13 +72,17 @@ class Package
      * @var boolean Access of the packages
      *
      * @ORM\Column(type="boolean", options={"default":false})
+     *
+     * @Groups({"get"})
      */
-    private $public;
+    private $public = false;
 
     /**
      * @var string The name of the package.
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"get"})
      */
     private $name;
 
@@ -65,6 +90,8 @@ class Package
      * @var string The version of the package.
      *
      * @ORM\Column(type="string", length=25)
+     *
+     * @Groups({"get"})
      */
     private $version;
 
@@ -74,6 +101,7 @@ class Package
      * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
      *
+     * @Groups({"get"})
      * @ApiSubresource
      */
     private $category;
@@ -82,6 +110,8 @@ class Package
      * @var string The description of the package.
      *
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Groups({"get"})
      */
     private $description;
 
@@ -90,6 +120,8 @@ class Package
      *
      * @Assert\Url()
      * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Groups({"get"})
      */
     private $repository;
 
@@ -98,6 +130,8 @@ class Package
     *
      * @Assert\Url()
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"get"})
      */
     private $website;
 
@@ -116,11 +150,11 @@ class Package
     private $updatedAt;
 
 
-    public function __construct(int $ownerUserId)
+    public function __construct(User $owner)
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
-        $this->owner = $ownerUserId;
+        $this->owner = $owner;
     }
 
 
@@ -242,12 +276,12 @@ class Package
         return $this;
     }
 
-    public function getOwner()
+    public function getOwner(): User
     {
         return $this->owner;
     }
 
-    public function setOwner(int $owner): self
+    public function setOwner(User $owner): self
     {
         $this->owner = $owner;
         return $this;

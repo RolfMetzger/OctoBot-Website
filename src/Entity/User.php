@@ -16,6 +16,24 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
+ * @ApiResource(
+ *     attributes={
+ *         "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *         "normalization_context"={"groups"={"get"}}
+ *     },
+ *     collectionOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *              "access_control_message"="Only admin can get users."
+ *          }
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_USER') and object.id == user.id",
+ *              "access_control_message"="Sorry, but you are not the user profile owner."
+ *          }
+ *     }
+ * )
  */
 class User implements UserInterface, \Serializable
 {
@@ -50,7 +68,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=64)
      */
-     // The length=64 works well with bcrypt algorithm.
+    // The length=64 works well with bcrypt algorithm.
     private $password;
 
     /**
@@ -81,6 +99,13 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="array")
      */
     private $roles;
+
+    /**
+     * @var array(Package) The packages list of this owner
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Package", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private $packages;
 
 
 
@@ -163,14 +188,12 @@ class User implements UserInterface, \Serializable
 
     public function setRoles($roles): self
     {
-        if (!in_array('ROLE_USER', $roles))
-        {
+        if (!in_array('ROLE_USER', $roles)) {
             $roles[] = 'ROLE_USER';
         }
 
-        foreach ($roles as $role)
-        {
-            if(substr($role, 0, 5) !== 'ROLE_') {
+        foreach ($roles as $role) {
+            if (substr($role, 0, 5) !== 'ROLE_') {
                 throw new InvalidArgumentException('A role name should start with "ROLE_"');
             }
         }

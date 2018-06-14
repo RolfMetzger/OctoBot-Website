@@ -15,7 +15,7 @@
                 <th>Vendor</th>
                 <td>{{ package.vendor }}</td>
             </tr>
-            <tr>
+            <tr {{ package.public ? 'class="table-success"' : 'class="table-danger"' }}>
                 <th>Public</th>
                 <td>{{ package.public ? 'Yes' : 'No' }}</td>
             </tr>
@@ -50,6 +50,10 @@
             <tr>
                 <th>UpdatedAt</th>
                 <td>{{ package.updatedAt ? package.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ package.owner.username }}</td>
             </tr>
         </tbody>
     </table>

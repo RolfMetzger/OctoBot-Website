@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @method Package|null find($id, $lockMode = null, $lockVersion = null)
  * @method Package|null findOneBy(array $criteria, array $orderBy = null)
- * @method Package[]    findAll()
  * @method Package[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class PackageRepository extends ServiceEntityRepository
@@ -17,6 +16,21 @@ class PackageRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Package::class);
+    }
+
+    public function findAll(bool $isSuperAdmin=false, int $ownerId=null)
+    {
+        $builder = $this->createQueryBuilder('p');
+        if (!$isSuperAdmin) {
+            $builder->andWhere('p.public = true');
+            if ($ownerId > 0) {
+                $builder->orWhere('p.owner = :owner');
+                $builder->setParameter('owner', $ownerId);
+            }
+        }
+        $builder->orderBy('p.public', 'ASC');
+        $builder->orderBy('p.name', 'ASC');
+        return $builder->getQuery()->getResult();
     }
 
 //    /**
