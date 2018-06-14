@@ -7,8 +7,10 @@ use Doctrine\ORM\Mapping\Table;
 use App\Entity\PackageCategory;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 
 /**
  * @ORM\Table(name="tbl_package")
@@ -21,15 +23,14 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         }
  *     },
  *     collectionOperations={
- *         "get"={
- *              "access_control"="object.owner == user",
- *              "access_control_message"="Sorry, but you are not the user profile owner."
- *          }
+ *         "api_questions_answer_get_subresource"={
+ *             "method"="GET", "normalization_context"={"groups"={"allowed_group"}}
+ *         }
  *     },
  *     itemOperations={
  *         "get"={
- *              "access_control"="is_granted('ROLE_SUPER_ADMIN') or object.owner == user",
- *              "access_control_message"="Sorry, but you are not the user profile owner."
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN') or object.getOwner() == user or object.getPublic()",
+ *              "access_control_message"="Sorry, but this package is not public."
  *          }
  *     }
  * )
@@ -43,7 +44,7 @@ class Package
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      */
     private $id;
 
@@ -53,7 +54,7 @@ class Package
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      * @ApiSubresource
      */
     private $owner;
@@ -73,7 +74,7 @@ class Package
      *
      * @ORM\Column(type="boolean", options={"default":false})
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      */
     private $public = false;
 
@@ -82,7 +83,7 @@ class Package
      *
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      */
     private $name;
 
@@ -91,7 +92,7 @@ class Package
      *
      * @ORM\Column(type="string", length=25)
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      */
     private $version;
 
@@ -101,7 +102,7 @@ class Package
      * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="packages")
      * @ORM\JoinColumn(nullable=false)
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      * @ApiSubresource
      */
     private $category;
@@ -111,7 +112,7 @@ class Package
      *
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Groups({"get"})
+     * @Groups({"get", "allowed_group"})
      */
     private $description;
 
