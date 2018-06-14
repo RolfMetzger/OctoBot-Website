@@ -142,13 +142,17 @@ Here is initial credentials of the super-admin user.
  - Password : superadmin
 
 
-## Demo
+## Screencast Demo
+
+ ![Demo](https://thumbs.gfycat.com/MelodicAgedGnatcatcher-size_restricted.gif)
+
+
+## Live Demo
 
 [http://drakkar-octobot.herokuapp.com/](http://drakkar-octobot.herokuapp.com/)
 
 Thanks to [Heroku](https://www.heroku.com/)
 
-![Demo](https://thumbs.gfycat.com/MelodicAgedGnatcatcher-size_restricted.gif)
 
 
 
