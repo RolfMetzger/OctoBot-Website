@@ -8,6 +8,9 @@ before_script:
   - psql -c "CREATE DATABASE octoweb;" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE octoweb TO octoweb;" -U postgres
 
+env:
+    - DATABASE_URL="pgsql://octoweb:db_password@127.0.0.1:5432/octoweb"
+
 script:
    - composer install
    - bin/console doctrine:migrations:migrate --no-interaction
