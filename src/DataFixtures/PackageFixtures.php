@@ -19,6 +19,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('instant_fluctuations_evaluator')
             ->setDescription('A  public "RealTime" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -30,6 +31,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('orderbook_evaluator')
             ->setDescription('A  public "RealTime" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -43,6 +45,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::BASIC_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('forum_evaluator')
             ->setDescription('A  public "Social" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -54,6 +57,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('news_evaluator')
             ->setDescription('A  public "Social" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -65,6 +69,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('stats_evaluator')
             ->setDescription('A  public "Social" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -78,6 +83,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('mixed_strategies_evaluator')
             ->setDescription('A  public "Strategy" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -91,6 +97,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('momentum_evaluator')
             ->setDescription('A  public "Technical Analysis" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -102,6 +109,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('trend_evaluator')
             ->setDescription('A  public "Technical Analysis" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -113,6 +121,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('volatility_evaluator')
             ->setDescription('A  public "Technical Analysis" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -126,6 +135,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('overall_state_analysis')
             ->setDescription('A  public "Utility" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -137,6 +147,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('pattern_analysis')
             ->setDescription('A  public "Utility" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -148,6 +159,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('statistics_analysis')
             ->setDescription('A  public "Utility" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -159,6 +171,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('text_analysis')
             ->setDescription('A  public "Utility" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')
@@ -170,6 +183,7 @@ class PackageFixtures extends Fixture implements DependentFixtureInterface
         $package = new Package($this->getReference(UserFixtures::SUPER_ADMIN_USER_REFERENCE)->getId());
         $package
             ->setVendor('tentacle')
+            ->setPublic(true)
             ->setName('trend_analysis')
             ->setDescription('A  public "Utility" tentacles (packages) for the OctoBot project evaluator.')
             ->setWebsite('https://github.com/Drakkar-Software')

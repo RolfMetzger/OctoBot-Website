@@ -3,7 +3,7 @@
 {% block title %}Edit Package{% endblock %}
 
 {% block body %}
-    <h1>Edit Package</h1>
+    <h1>Edit Package #{{ package.id }}</h1>
 
     {{ include('package/_form.html.twig', {'button_label': 'Update'}) }}
 

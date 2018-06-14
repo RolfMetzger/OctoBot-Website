@@ -35,7 +35,7 @@ class Package
     /**
      * @var string The owner of the package.
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"default":1})
      */
     private $owner;
 
@@ -45,6 +45,14 @@ class Package
      * @ORM\Column(type="string", length=255)
      */
     private $vendor;
+
+
+    /**
+     * @var boolean Access of the packages
+     *
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    private $public;
 
     /**
      * @var string The name of the package.
@@ -245,4 +253,14 @@ class Package
         return $this;
     }
 
+    public function getPublic(): bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
+        return $this;
+    }
 }

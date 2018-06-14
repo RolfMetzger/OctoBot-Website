@@ -91,12 +91,6 @@ class UserType extends AbstractType
                         ),
                     ));
                 }
-                // $builder->add('isActive', ChoiceType::class, array(
-                //     'choices'  => array(
-                //         'Yes' => true,
-                //         'No' => false,
-                //     ),
-                // ));
                 $builder->add('isActive', CheckboxType::class, array(
                     'required' => false,
                 ));
