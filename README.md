@@ -127,7 +127,7 @@ php bin/console server:start
 
 For example, with your browser open this page :  http://127.0.0.1:8000 and GO !
 
-![Alt text](doc/octobot_website_login.png?raw=true "OctoBot website login page")
+![Login page](doc/octobot_website_login.png?raw=true "OctoBot website login page")
 
 Here is initial credentials of the basic user.
  - Username : user
@@ -147,6 +147,9 @@ Here is initial credentials of the super-admin user.
 [http://drakkar-octobot.herokuapp.com/](http://drakkar-octobot.herokuapp.com/)
 
 Thanks to [Heroku](https://www.heroku.com/)
+
+![Demo](https://thumbs.gfycat.com/MelodicAgedGnatcatcher-size_restricted.gif)
+
 
 
 <!-- ## Contributing
