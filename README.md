@@ -1,6 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/844199a03228438d924ed869ccd24aea)](https://www.codacy.com/app/LaurentBouquet/OctoBot-Website?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drakkar-Software/OctoBot-Website&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/drakkar-software/octobot-website/badge)](https://www.codefactor.io/repository/github/drakkar-software/octobot-website)
-[![Build Status](https://semaphoreci.com/api/v1/laurentbouquet/joliquiz/branches/master/badge.svg)](https://semaphoreci.com/laurentbouquet/joliquiz)
+[![Build Status](https://semaphoreci.com/api/v1/herklos/octobot-website/branches/master/badge.svg)](https://semaphoreci.com/herklos/octobot-website)
 [![Build Status](https://travis-ci.org/Drakkar-Software/OctoBot-Website.svg?branch=master)](https://travis-ci.org/Drakkar-Software/OctoBot-Website)
 
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
