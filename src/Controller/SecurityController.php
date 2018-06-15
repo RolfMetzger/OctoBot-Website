@@ -25,7 +25,9 @@ class SecurityController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        \Swift_Mailer $mailer)
     {
         // 1) build the form
         $user = new User();
@@ -44,8 +46,34 @@ class SecurityController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', sprintf('User "%s" is registred.', $user->getUsername()));
+
             // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('send@example.com')
+                ->setTo('recipient@example.com')
+                ->setBody(
+                    $this->renderView(
+                        // templates/emails/registration.html.twig
+                        'emails/registration.html.twig',
+                        array('username' => $user->getUsername())
+                    ),
+                    'text/html'
+                )
+                /*
+                 * If you also want to include a plaintext version of the message
+                ->addPart(
+                    $this->renderView(
+                        'emails/registration.txt.twig',
+                        array('name' => $name)
+                    ),
+                    'text/plain'
+                )
+                */
+            ;
+            $mailer->send($message);
+
+            $this->addFlash('success', sprintf('Please XXXX confirm your email address,  "%s" is registred.', $user->getUsername()));
 
             return $this->redirectToRoute('login');
         }
