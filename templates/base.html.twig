@@ -37,7 +37,7 @@
                         <a class="nav-link {% if '/package/' in app.request.server.get('REQUEST_URI') %} active {% endif %} nav-link" href="{{ path('package_index') }}">Packages</a>
                     </li>
                     <li>
-                        <a class="nav-link {% if '/packagecategory/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('package_category_index') }}">Package types</a>
+                        <a class="nav-link {% if '/packagecategory/' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('package_category_index') }}">Package categories</a>
                     </li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li>

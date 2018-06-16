@@ -3,7 +3,7 @@
 {% block title %}PackageCategory{% endblock %}
 
 {% block body %}
-    <h1>Package Type "{{ package_category.shortname }}"</h1>
+    <h1>package category "{{ package_category.shortname }}"</h1>
 
     <table class="table">
         <tbody>
@@ -18,6 +18,10 @@
             <tr>
                 <th>Long name</th>
                 <td>{{ package_category.longname }}</td>
+            </tr>
+            <tr>
+                <th>Package Category Parent</th>
+                <td>{{ package_category.parent }}</td>
             </tr>
         </tbody>
     </table>

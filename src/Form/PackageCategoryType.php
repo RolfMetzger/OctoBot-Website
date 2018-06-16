@@ -14,6 +14,7 @@ class PackageCategoryType extends AbstractType
         $builder
             ->add('shortname')
             ->add('longname')
+            ->add('parent')
         ;
     }
 

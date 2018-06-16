@@ -29,7 +29,8 @@ class PackageRepository extends ServiceEntityRepository
             }
         }
         $builder->orderBy('p.public', 'ASC');
-        $builder->orderBy('p.name', 'ASC');
+        $builder->addOrderBy('p.category', 'ASC');
+        $builder->addOrderBy('p.name', 'ASC');
         return $builder->getQuery()->getResult();
     }
 

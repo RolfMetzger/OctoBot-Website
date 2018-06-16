@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @method PackageCategory|null find($id, $lockMode = null, $lockVersion = null)
  * @method PackageCategory|null findOneBy(array $criteria, array $orderBy = null)
- * @method PackageCategory[]    findAll()
  * @method PackageCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class PackageCategoryRepository extends ServiceEntityRepository
@@ -18,6 +17,14 @@ class PackageCategoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, PackageCategory::class);
     }
+
+    public function findAll()
+    {
+        $builder = $this->createQueryBuilder('p');
+        $builder->orderBy('p.parent', 'DESC');
+        return $builder->getQuery()->getResult();
+    }
+
 
 //    /**
 //     * @return PackageCategory[] Returns an array of PackageCategory objects

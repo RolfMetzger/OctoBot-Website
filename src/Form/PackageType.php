@@ -25,7 +25,7 @@ class PackageType extends AbstractType
             ))
             ->add('name')
             ->add('version')
-            ->add('category', null, array('label' => 'Type'))
+            ->add('category', null, array('label' => 'Category'))
             ->add('description')
             ->add('website')
             ->add('repository')

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\PersistentCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -23,7 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class PackageCategory
 {
     /**
-     * @var int The id of this package type
+     * @var int The id of this package category
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,7 +33,25 @@ class PackageCategory
     private $id;
 
     /**
-     * @var string The shortname of the package type
+     * @var PackageCategory The parent of this category.
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\PackageCategory", inversedBy="categories")
+     * @ORM\JoinColumn(nullable=true)
+     *
+     * @Groups({"set"})
+     * @ApiSubresource
+     */
+    private $parent;
+
+    /**
+     * @var string The categories children list of this package category
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PackageCategory", mappedBy="parent", cascade={"persist", "remove"})
+     */
+    private $categories;
+
+    /**
+     * @var string The shortname of the package category
      *
      * @ORM\Column(type="string", length=15)
      *
@@ -41,7 +60,7 @@ class PackageCategory
     private $shortname;
 
     /**
-     * @var string The longname of the package type
+     * @var string The longname of the package category
      *
      * @ORM\Column(type="string", length=50, nullable=true)
      *
@@ -50,7 +69,7 @@ class PackageCategory
     private $longname;
 
     /**
-     * @var string The packages list in this package type
+     * @var string The packages list in this package category
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Package", mappedBy="category", cascade={"persist", "remove"})
      */
@@ -99,6 +118,18 @@ class PackageCategory
         if ($this !== $package->getCategory()) {
             $package->setCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getParent(): ?PackageCategory
+    {
+        return $this->parent;
+    }
+
+    public function setParent(PackageCategory $parent): self
+    {
+        $this->parent = $parent;
 
         return $this;
     }
