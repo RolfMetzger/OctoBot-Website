@@ -48,15 +48,14 @@ class SecurityController extends Controller
 
             $this->addFlash('success', sprintf('User "%s" is registred.', $user->getUsername()));
 
-            // ... do any other work - like sending them an email, etc
             $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('send@example.com')
-                ->setTo('recipient@example.com')
+                ->setFrom('calagan.dev@gmail.com')
+                ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
                         // templates/emails/registration.html.twig
                         'emails/registration.html.twig',
-                        array('username' => $user->getUsername())
+                        array('username' => $user->getUsername(), 'email' => $user->getEmail())
                     ),
                     'text/html'
                 )

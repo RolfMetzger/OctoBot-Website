@@ -1,10 +1,10 @@
 {# templates/emails/registration.html.twig #}
 <h3>You did it! You registered!</h3>
 
-Hi {{ username }}! You're successfully registered.
+Hi {{ username }}! You're successfully registered, with {{ email }} email.
 
 {# example, assuming you have a route named "login" #}
-To login, go to: <a href="{{ url('login') }}">...</a>.
+To login, go to: <a href="{{ url('login') }}">{{ app_name }}</a>.
 
 Thanks!
 
