@@ -15,6 +15,7 @@ use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 /**
  * @ORM\Table(name="tbl_package")
  * @ORM\Entity(repositoryClass="App\Repository\PackageRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @ApiResource(
  *     attributes={
  *         "order"={
@@ -297,5 +298,13 @@ class Package
     {
         $this->public = $public;
         return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
     }
 }
