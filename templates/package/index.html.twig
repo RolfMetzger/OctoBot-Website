@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Package index{% endblock %}
+{% block title %}{{'Package index'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Package index</h1>
+    <h1>{{ 'Package index'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Vendor</th>
-                <th>Public</th>
-                <th>Name</th>
-                <th>Version</th>
-                <th>Category</th>
-                <th>Actions</th>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Vendor'|trans }}</th>
+                <th>{{ 'Public'|trans }}</th>
+                <th>{{ 'Name'|trans }}</th>
+                <th>{{ 'Version'|trans }}</th>
+                <th>{{ 'Category'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -22,22 +22,22 @@
             <tr {{ package.public ? '' : 'class="table-danger"' }}>
                 <td>{{ package.id }}</td>
                 <td>{{ package.vendor }}</td>
-                <td>{{ package.public ? 'Yes' : 'No' }}</td>
+                <td>{{ package.public ? 'Yes'|trans : 'No'|trans }}</td>
                 <td>{{ package.name }}</td>
                 <td>{{ package.version }}</td>
                 <td>{{ package.category }}</td>
                 <td>
                     <div class="form-check-inline">
-                        <a class="btn btn-primary mr-2" href="{{ path('package_show', {'id': package.id}) }}"><i class="fas fa-eye"></i> Show</a>
+                        <a class="btn btn-primary mr-2" href="{{ path('package_show', {'id': package.id}) }}"><i class="fas fa-eye"></i> {{'Show'|trans}}</a>
                         {% if app.user %}
                             {% if package.owner == app.user %}
                                 {% if is_granted('ROLE_USER') %}
-                                    <a class="btn btn-primary mr-2" href="{{ path('package_edit', {'id': package.id}) }}"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a class="btn btn-primary mr-2" href="{{ path('package_edit', {'id': package.id}) }}"><i class="fas fa-pencil-alt"></i> {{'Edit'|trans}}</a>
                                     {{ include('package/_delete_form.html.twig') }}
                                 {% endif %}
                             {% else  %}
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <a class="btn btn-primary mr-2" href="{{ path('package_edit', {'id': package.id}) }}"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a class="btn btn-primary mr-2" href="{{ path('package_edit', {'id': package.id}) }}"><i class="fas fa-pencil-alt"></i> {{'Edit'|trans}}</a>
                                     {{ include('package/_delete_form.html.twig') }}
                                 {% endif  %}
                             {% endif  %}
@@ -47,13 +47,13 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">{{'no records found'|trans}}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     {% if is_granted('ROLE_USER') %}
-        <a class="btn btn-primary" href="{{ path('package_new') }}"><i class="fas fa-plus"></i> Create new</a>
+        <a class="btn btn-primary" href="{{ path('package_new') }}"><i class="fas fa-plus"></i> {{'Create new'|trans}}</a>
     {% endif %}
 {% endblock %}
