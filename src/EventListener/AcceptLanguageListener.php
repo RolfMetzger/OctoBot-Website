@@ -15,48 +15,45 @@ class AcceptLanguageListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        dump($this->availablesLanguages);
-
-        // s'il ne s'agit pas d'une master request, alors ne pas allez plus loin
+        // if it is not a master request, then do not go further
         if (!$event->isMasterRequest()) {
             return;
         }
 
-        // extraire la variable request de l'évènement
+        // extract the request variable from the event
         $request = $event->getRequest();
 
-        // vérifier qu'il n'y a aucun moyen de déterminer la langue d'une autre manière, comme par exemple à l'aide d'une URL spécifique
-        // if the locale has been set as a _locale routing parameter, définir la variable '_locale' pour la session, et ne pas aller plus loin
+        // check that there is no way to determine the language in any other way, such as using a specific URL
+        // if the locale has been set as a _locale routing parameter, set the variable '_locale' for the session, and not go further
         if ($locale = $request->attributes->get('_locale')) {
             $request->getSession()->set('_locale', $locale);
             return;
         }
 
-        // vérifier que la langue n'est pas déjà stockée dans la session
+        // check that the language is not already stored in the session
         $sessionLocale = $request->getSession()->get('_locale');
         if ($sessionLocale) {
             $request->setLocale($sessionLocale);
             return;
         }
 
-        // Récupérer la liste des langues possibles
+        // retrieve the list of possible languages
         if (is_null($this->availablesLanguages)) {
             $this->availablesLanguages = array('en');
         }
 
-        // Récupérer les langues que le client est capable de comprendre with $request->headers->get('accept-language'),
-        // et déterminer quelle variante locale est préférée
-        // Si aucune langue ne correspond, ne pas aller plus loin
+        // retrieve the languages that the client is able to understand with $request->headers->get('accept-language'),
+        // and determine which local variant is preferred
+        // if no language matches, do not go further
         $locale = $request->getPreferredLanguage($this->availablesLanguages);
 
-        // Définir le paramètre "locale", en fonction de la langue la plus adaptée
+        // define the "local" parameter, according to the most suitable language
         $request->setLocale($locale);
 
-        // Mémoriser le paramètre "locale", dans la session,
+        // save the "locale" parameter, in the session
         $request->getSession()->set('_locale', $locale);
 
         return;
     }
-
 
 }
