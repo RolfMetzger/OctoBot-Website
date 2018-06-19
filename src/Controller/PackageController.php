@@ -6,6 +6,7 @@ use App\Entity\Package;
 use App\Form\PackageType;
 use App\Repository\PackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,7 @@ class PackageController extends Controller
      */
     public function index(PackageRepository $packageRepository): Response
     {
+        // 'framework.translator.paths'
         return $this->render('package/index.html.twig', ['packages' => $packageRepository->findAll($this->isGranted('ROLE_SUPER_ADMIN'), $this->userId)]);
     }
 
