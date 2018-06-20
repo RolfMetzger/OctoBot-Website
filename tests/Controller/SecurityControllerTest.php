@@ -74,7 +74,7 @@ class SecurityControllerTest extends WebTestCase
         // after login -> /packagecategory : OK
         $crawler = $this->client->request('GET', '/packagecategory/');
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->assertSame('package categories index', $crawler->filter('h1')->text());
+        $this->assertSame('Package Categories index', $crawler->filter('h1')->text());
 
         // after login -> /admin : KO
         $this->client->request('GET', '/admin/');
